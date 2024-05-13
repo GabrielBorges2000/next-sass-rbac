@@ -58,7 +58,7 @@ export async function createAccount(app: FastifyInstance) {
           member_on: autoJoinOrganization
             ? {
                 create: {
-                  organizationsId: autoJoinOrganization.id,
+                  organizationId: autoJoinOrganization.id,
                 },
               }
             : undefined,
