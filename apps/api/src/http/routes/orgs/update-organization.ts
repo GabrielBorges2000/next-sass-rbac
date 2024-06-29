@@ -10,7 +10,7 @@ import { getPermissions } from '@/utils/get-user-permissions'
 import { BadRequestError } from '../_erros/bad_request-error copy'
 import { UnauthorizedError } from '../_erros/unauthorized-error'
 
-export async function createOrganization(app: FastifyInstance) {
+export async function updateOrganization(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
@@ -24,7 +24,7 @@ export async function createOrganization(app: FastifyInstance) {
           body: z.object({
             name: z.string(),
             domain: z.string().nullish(),
-            shouldAttachUserByDomain: z.boolean().optional(),
+            shouldAttachUsersByDomain: z.boolean().optional(),
           }),
           params: z.object({
             slug: z.string(),
@@ -41,7 +41,7 @@ export async function createOrganization(app: FastifyInstance) {
         const { membership, organization } =
           await request.getUserMembership(slug)
 
-        const { name, domain, shouldAttachUserByDomain } = request.body
+        const { name, domain, shouldAttachUsersByDomain } = request.body
 
         const authOrganization = organizationSchema.parse(organization)
 
@@ -76,7 +76,7 @@ export async function createOrganization(app: FastifyInstance) {
           data: {
             name,
             domain,
-            shouldAttachUserByDomain,
+            shouldAttachUsersByDomain,
           },
         })
 

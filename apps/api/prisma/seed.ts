@@ -43,7 +43,7 @@ async function seed() {
       domain: 'acme.com',
       slug: 'acme-admin',
       avatarUrl: faker.image.avatarGitHub(),
-      shouldAttachUserByDomain: true,
+      shouldAttachUsersByDomain: true,
       ownerId: user.id,
       projects: {
         createMany: {
@@ -84,7 +84,7 @@ async function seed() {
           ],
         },
       },
-      member: {
+      members: {
         createMany: {
           data: [
             {
@@ -150,7 +150,7 @@ async function seed() {
           ],
         },
       },
-      member: {
+      members: {
         createMany: {
           data: [
             {
@@ -216,7 +216,7 @@ async function seed() {
           ],
         },
       },
-      member: {
+      members: {
         createMany: {
           data: [
             {
@@ -237,6 +237,7 @@ async function seed() {
     },
   })
 }
+
 seed().then(() => {
   console.log('Database seeded!')
 })

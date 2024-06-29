@@ -41,7 +41,7 @@ export async function getOrganizations(app: FastifyInstance) {
             name: true,
             slug: true,
             avatarUrl: true,
-            member: {
+            members: {
               select: {
                 role: true,
               },
@@ -51,7 +51,7 @@ export async function getOrganizations(app: FastifyInstance) {
             },
           },
           where: {
-            member: {
+            members: {
               some: {
                 userId,
               },
@@ -60,10 +60,10 @@ export async function getOrganizations(app: FastifyInstance) {
         })
 
         const organizationsWithuserRole = organizations.map(
-          ({ member, ...org }) => {
+          ({ members, ...org }) => {
             return {
               ...org,
-              role: roleSchema.parse(member[0].role),
+              role: roleSchema.parse(members[0].role),
             }
           },
         )
